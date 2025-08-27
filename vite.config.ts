@@ -4,10 +4,17 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
-  base: "/homework-helper/",   // Important for subpath
+  base: mode === "production" ? "/homework-helper/" : "/",
   server: {
     host: "::",
-    port: 8080
+    port: 8080,
+    fs: {
+      strict: true
+    }
+  },
+  preview: {
+    port: 8080,
+    strictPort: true
   },
   plugins: [
     react(),
